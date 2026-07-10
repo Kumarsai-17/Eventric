@@ -1,0 +1,119 @@
+/* Marketplace Page - Premium Design */
+.marketplace {
+  padding-top: var(--space-8);
+  min-height: calc(100vh - 80px - 120px);
+  margin-bottom: var(--space-10);
+}
+
+.marketplace h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-3);
+  background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.marketplace > div:first-child {
+  margin-bottom: var(--space-7);
+  padding-bottom: var(--space-5);
+  border-bottom: 2px solid rgba(139, 92, 246, 0.2);
+  max-width: 700px;
+  margin-top: 72px;
+}
+
+.marketplace > div:first-child p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.marketplace__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-5);
+  margin-bottom: var(--space-10);
+}
+
+.marketplace__card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s var(--ease);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.marketplace__card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(139, 92, 246, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
+}
+
+.marketplace__card-body h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.01em;
+}
+
+.marketplace__seat {
+  margin-top: var(--space-3);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gold);
+  background: rgba(251, 191, 36, 0.1);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+
+.ticket-stub__tear {
+  margin: var(--space-5) 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+.marketplace__card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.marketplace__price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--accent);
+  margin-right: var(--space-2);
+  text-shadow: 0 2px 8px rgba(47, 230, 198, 0.3);
+}
+
+.marketplace__original {
+  text-decoration: line-through;
+  color: var(--text-faint);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-right: var(--space-2);
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .marketplace h1 {
+    font-size: 1.75rem;
+  }
+
+  .marketplace__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+}

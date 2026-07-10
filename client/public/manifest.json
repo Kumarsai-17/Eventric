@@ -1,0 +1,9 @@
+{
+  "short_name": "Eventric",
+  "name": "Eventric — Live Event Booking & Ticket Exchange",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0D0D14",
+  "background_color": "#0D0D14"
+}

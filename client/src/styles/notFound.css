@@ -1,0 +1,55 @@
+/* Not Found Page - Premium Design */
+.not-found {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-5);
+  padding: var(--space-8) var(--space-5);
+  background-image: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1), transparent 60%);
+}
+
+.not-found__code {
+  font-size: 6rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.9;
+  text-shadow: 0 4px 24px rgba(139, 92, 246, 0.3);
+}
+
+.not-found h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-2);
+}
+
+.not-found p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-5);
+  max-width: 400px;
+}
+
+.not-found .btn {
+  padding: var(--space-4) var(--space-7);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .not-found__code {
+    font-size: 4.5rem;
+  }
+
+  .not-found h1 {
+    font-size: 1.6rem;
+  }
+}
