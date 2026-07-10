@@ -14,7 +14,12 @@ const { notFound, errorHandler } = require("./middleware/errorHandler");
 
 // Validate required environment variables
 const useMockPayment = process.env.USE_MOCK_PAYMENT === "true";
-const requiredEnvVars = ["MONGO_URI", "JWT_SECRET"];
+const requiredEnvVars = ["JWT_SECRET"];
+
+// Check for MongoDB URI (support both MONGODB_URI and MONGO_URI)
+if (!process.env.MONGODB_URI && !process.env.MONGO_URI) {
+  requiredEnvVars.push("MONGODB_URI or MONGO_URI");
+}
 
 // Only require Razorpay keys if not using mock payment
 if (!useMockPayment) {
@@ -44,7 +49,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: { 
-    origin: process.env.CLIENT_URL || "http://localhost:3000", 
+    origin: process.env.FRONTEND_URL || process.env.CLIENT_URL || "http://localhost:3000", 
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
   },
@@ -78,7 +83,7 @@ const authLimiter = rateLimit({
   skipSuccessfulRequests: true,
 });
 
-app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:3000", credentials: true }));
+app.use(cors({ origin: process.env.FRONTEND_URL || process.env.CLIENT_URL || "http://localhost:3000", credentials: true }));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
