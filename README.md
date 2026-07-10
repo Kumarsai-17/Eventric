@@ -1,218 +1,264 @@
-# Eventric
+# 🎭 Eventric - Smart Event Booking Platform
 
-A MERN-stack, real-time event booking and verified ticket-exchange platform.
-Live seat locking · signed QR tickets · secure ownership transfer · fair resale marketplace.
+**A modern, full-stack event ticketing system with real-time seat selection, location-based discovery, and a fair resale marketplace where prices can only go down.**
+
+## ✨ Key Features
+
+### 🎟️ Smart Booking System
+- **Real-time seat selection** with live availability updates via Socket.IO
+- Interactive seat maps with multiple pricing tiers (General, Silver, Gold, Platinum)
+- QR code ticket generation for contactless entry
+- Booking cancellation with time-based restrictions (within 48 hours, not within 72 hours of event)
+
+### 📍 Location-Based Discovery
+- Automatic location detection on login/registration
+- City-based event filtering for personalized experience
+- 500+ Indian cities supported
+- Events and resale tickets automatically filtered by user's location
+- Geolocation API integration with reverse geocoding
+
+### 💰 Fair Resale Marketplace
+- Anti-scalping system: resale prices **cannot exceed original price**
+- Secure ticket transfer with new QR code generation on purchase
+- Automatic seller notifications on successful sales with payment confirmation
+- Buyer notifications with new ticket details
+- Time-based listing restrictions (cannot list within 24 hours of event)
+- Buyer protection with two-step payment verification (order → confirm)
+
+### 🎨 Advanced Event Creation
+- **Visual seat editor** with drag-and-drop style customization
+- Click-to-add, click-to-remove, and click-to-change-tier modes
+- Pre-built venue templates (Theater, Stadium, Conference Hall, Club, Concert Hall)
+- Simple mode (tier-based configuration) and Advanced mode (visual editor)
+- Custom tier configuration with dynamic pricing
+- Add/remove rows and columns dynamically
+- Real-time seat count and pricing summary
+- Separate date and time selectors for better UX
+- Center-aligned, professional form layout
+
+### 🔔 Real-Time Notifications
+- Instant notifications for bookings, payments, and resale updates
+- WebSocket-powered notification bell with unread count
+- Persistent notification history
+- Seller receives payment notification when ticket sells
+- Buyer receives ticket purchase confirmation
+
+### 👨‍💼 Admin Dashboard
+- Event management and analytics
+- User management with role-based access control
+- Revenue tracking and statistics
+- Event creation with advanced seat editor
+- Real-time booking monitoring
+
+### 🎭 Modern UI/UX
+- Beautiful dark theme with purple accents (#8B5CF6)
+- Fully responsive design for all devices
+- Smooth animations and transitions
+- Ticket-stub styled components with perforation effects
+- Interactive canvas backgrounds with spotlight effects
+- Clean, centered layouts
+- Professional color scheme (Purple, Gold, Teal)
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **React 18** - Modern component-based UI
+- **React Router v6** - Client-side routing
+- **Socket.IO Client** - Real-time updates
+- **Axios** - HTTP client
+- **Context API** - State management
+- **CSS3** - Custom styling with CSS variables
+
+### Backend
+- **Node.js & Express** - RESTful API server
+- **MongoDB & Mongoose** - Database and ODM with geospatial indexing
+- **Socket.IO** - WebSocket communication for real-time features
+- **JWT** - Token-based authentication
+- **QRCode** - Secure ticket generation with validation
+- **Bcrypt** - Password hashing
+- **Multer** - File upload handling
+
+### Features Architecture
+- Real-time seat locking mechanism (5-minute TTL)
+- Transaction-safe booking confirmation with MongoDB sessions
+- Atomic resale operations with ownership transfer
+- Location-based geospatial queries (2dsphere index)
+- Time-controlled cancellation and resale policies
+- QR code rotation on ticket transfer for security
+- Payment verification with signature validation
 
 ## 🚀 Quick Start
 
-```bash
-# Install all dependencies
-npm run install-all
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (local or MongoDB Atlas)
+- Git
 
-# Configure environment variables (see SETUP.md)
-cd server && cp .env.example .env
-cd ../client && cp .env.example .env
+## 📱 User Flow
 
-# Run both client and server
-npm run dev
+### For Event Attendees
+
+1. **Register/Login**
+   - Create account with email and password
+   - Location selector automatically appears
+   - Choose your city or let it auto-detect
+
+2. **Browse Events**
+   - Events automatically filtered by your city
+   - Search by name, city, or tags
+   - Filter by category (Music, Sports, Movies, etc.)
+
+3. **Book Tickets**
+   - View event details with real-time seat availability
+   - Click seats to select (multiple selection supported)
+   - Seats lock automatically for 5 minutes
+   - Proceed to secure checkout
+
+4. **My Tickets**
+   - View all active tickets with QR codes
+   - See tickets listed for resale
+   - Cancel bookings (within 48 hours, not within 72 hours of event)
+
+5. **Resale Marketplace**
+   - List tickets for resale (max: original price)
+   - Cannot list within 24 hours of event
+   - Buy discounted tickets from others
+   - New QR code generated on purchase
+
+### For Event Organizers
+
+1. **Create Event**
+   - Choose from venue templates or create custom layout
+   - Use **Advanced Editor** for visual seat customization
+   - Add/remove seats by clicking
+   - Configure multiple pricing tiers
+   - Set event details and location
+
+2. **Manage Events**
+   - View bookings and revenue
+   - Check real-time seat availability
+   - Monitor resale activity
+
+## 🎯 Project Highlights
+
+### Security
+- JWT-based authentication with secure token storage
+- Password hashing with bcrypt
+- Input validation and sanitization
+- Protected routes with role-based access control
+- Payment signature verification
+- QR code validation to prevent tampering
+
+### Real-Time Features
+- Live seat availability updates
+- Instant notifications via WebSocket
+- Seat locking mechanism
+- Real-time dashboard statistics
+
+### Performance
+- Optimized MongoDB queries with indexing
+- Geospatial 2dsphere index for location queries
+- Debounced search for better UX
+- Lazy loading and code splitting
+
+### Code Quality
+- Clean, modular code structure
+- Consistent naming conventions
+- Error handling throughout
+- Production-ready logging
+- No unnecessary console logs
+
+### Business Logic
+- Time-based booking cancellation rules
+- Anti-scalping resale price caps
+- Automatic seat unlocking after timeout
+- Transaction-safe booking confirmation
+- QR code rotation on ownership transfer
+
+## 📂 Project Structure
+
 ```
-
-Visit http://localhost:3000 to see the app!
-
-**📖 For detailed setup instructions, see [SETUP.md](./SETUP.md)**
-
-## Stack
-
-- **Frontend:** React, React Router DOM, Axios, Socket.IO client, plain CSS (no Tailwind/TypeScript)
-- **Backend:** Node.js, Express.js, Socket.IO
-- **Database:** MongoDB + Mongoose
-- **Auth:** JWT
-- **Payments:** Razorpay
-- **File uploads:** Cloudinary
-
-## ✨ Core Features
-
-- 🔐 **User Authentication** - JWT-based secure auth with role-based access
-- 🎫 **Event Management** - Create and manage events with seat maps
-- ⚡ **Real-Time Seat Locking** - Live updates via Socket.IO, no double bookings
-- 📱 **QR Ticket Generation** - HMAC-signed tickets for fraud prevention
-- 💳 **Secure Payments** - Razorpay integration with payment verification
-- 🔄 **Ticket Resale Marketplace** - Fair pricing, ownership transfer, QR rotation
-- 📍 **Geo-Based Discovery** - Find events near you
-- 🔔 **Notifications System** - Real-time updates on bookings and events
-- 👑 **Admin Dashboard** - Platform management and analytics
-
-## 📁 Project Structure
-
-```
-eventric/
-├── client/                 React frontend
+Eventric/
+├── client/                 # React frontend
 │   ├── public/
 │   └── src/
-│       ├── components/     Reusable UI components
-│       ├── pages/          Route pages
-│       ├── services/       API & socket services
-│       ├── context/        React context (Auth)
-│       └── styles/         Pure CSS styling
-│
-└── server/                 Express backend
-    ├── config/             Database, Cloudinary, Payment gateway
-    ├── controllers/        Business logic
-    ├── routes/             API routes
-    ├── middleware/         Auth, validation, error handling
-    ├── models/             MongoDB schemas
-    ├── sockets/            Real-time seat locking
-    └── utils/              QR generation, JWT, notifications
+│       ├── components/     # Reusable components
+│       ├── context/        # React Context (Auth)
+│       ├── pages/          # Page components
+│       ├── services/       # API service layer
+│       ├── styles/         # CSS files
+│       └── utils/          # Utility functions
+├── server/                 # Node.js backend
+│   ├── config/            # Configuration files
+│   ├── controllers/       # Route controllers
+│   ├── middleware/        # Custom middleware
+│   ├── models/            # Mongoose models
+│   ├── routes/            # API routes
+│   ├── sockets/           # Socket.IO handlers
+│   └── utils/             # Helper functions
+└── package.json           # Root scripts
 ```
 
-## 🔒 Security Features
+## 🔑 Key Technologies & Libraries
 
-- ✅ JWT Authentication
-- ✅ Password Hashing (bcrypt)
-- ✅ Protected Routes
-- ✅ Rate Limiting (100 req/15min)
-- ✅ Auth Rate Limiting (5 attempts/15min)
-- ✅ NoSQL Injection Prevention
-- ✅ Security Headers (Helmet.js)
-- ✅ CORS Protection
-- ✅ Input Validation
-- ✅ QR Fraud Prevention (HMAC signatures)
+### Frontend Dependencies
+- `react` - UI library
+- `react-router-dom` - Routing
+- `axios` - HTTP client
+- `socket.io-client` - WebSocket client
 
-## 💡 How It Works
+### Backend Dependencies
+- `express` - Web framework
+- `mongoose` - MongoDB ODM
+- `socket.io` - WebSocket server
+- `jsonwebtoken` - JWT authentication
+- `bcryptjs` - Password hashing
+- `qrcode` - QR code generation
+- `express-async-handler` - Async error handling
+- `cors` - Cross-origin resource sharing
+- `dotenv` - Environment variables
 
-### Real-Time Seat Locking
+## 🎓 Learning Outcomes
 
-`sockets/seatSocket.js` handles `seat:hold` / `seat:release` over Socket.IO, backed by a `SeatLock` collection with:
-- Unique `(event, seatId)` index - prevents double booking
-- TTL index - auto-releases expired locks
-- Socket disconnect handling - frees abandoned seats
-
-### Booking Confirmation
-
-`bookingController.confirmBooking` uses MongoDB transactions to:
-1. Update seat statuses atomically
-2. Clean up seat locks
-3. Create booking record
-4. Generate HMAC-signed QR ticket
-
-### Resale Marketplace
-
-- Enforces `resalePrice <= originalPrice`
-- Transfers booking ownership
-- Rotates QR token (invalidates old QR)
-- Maintains ownership history trail
-
-### Check-In & Fraud Prevention
-
-`bookingController.checkInTicket`:
-1. Verifies HMAC signature
-2. Checks QR matches current booking data
-3. Rejects tampered/forged/superseded tickets
-4. Marks ticket as checked in
-
-## 🚀 Deployment
-
-### Frontend (Vercel/Netlify)
-
-```bash
-cd client
-npm run build
-# Deploy the build/ folder
-```
-
-Set environment variables:
-```
-REACT_APP_API_URL=https://your-api.com/api
-REACT_APP_SOCKET_URL=https://your-api.com
-```
-
-### Backend (Render/Railway)
-
-Deploy the `server/` folder with environment variables from `.env.example`.
-
-Set `NODE_ENV=production`
-
-### Database (MongoDB Atlas)
-
-Use MongoDB Atlas cloud database. Update `MONGO_URI` in your production environment.
-
-## 📜 Available Scripts
-
-### Root Directory
-```bash
-npm run dev          # Run both client & server
-npm run client       # Run frontend only
-npm run server       # Run backend only
-npm run install-all  # Install all dependencies
-npm run build        # Build frontend for production
-```
-
-### Server
-```bash
-npm start      # Production mode
-npm run dev    # Development mode with nodemon
-```
-
-### Client
-```bash
-npm start      # Development server
-npm run build  # Production build
-npm test       # Run tests
-```
-
-## 📝 Environment Variables
-
-### Server (.env)
-```env
-MONGO_URI=mongodb+srv://...
-JWT_SECRET=your_secret_key
-RAZORPAY_KEY_ID=rzp_test_...
-RAZORPAY_KEY_SECRET=...
-CLOUDINARY_CLOUD_NAME=...
-CLOUDINARY_API_KEY=...
-CLOUDINARY_API_SECRET=...
-```
-
-### Client (.env)
-```env
-REACT_APP_API_URL=http://localhost:5000/api
-REACT_APP_SOCKET_URL=http://localhost:5000
-```
-
-## 🛠️ Tech Stack Details
-
-| Layer | Technologies |
-|-------|-------------|
-| Frontend | React 18, React Router v6, Axios, Socket.IO Client |
-| Backend | Node.js, Express.js, Socket.IO |
-| Database | MongoDB, Mongoose ODM |
-| Authentication | JWT, bcryptjs |
-| Payments | Razorpay |
-| File Storage | Cloudinary |
-| Real-Time | Socket.IO |
-| Validation | express-validator |
-| Security | Helmet, express-rate-limit, express-mongo-sanitize |
-
-## 📋 User Roles
-
-- **user** - Book tickets, resell tickets, manage bookings
-- **organizer** - Create events, manage event details, check-in tickets
-- **admin** - Full platform access, user management, analytics
+This project demonstrates:
+- Full-stack JavaScript development (MERN stack)
+- Real-time communication with WebSockets
+- Payment gateway integration
+- Authentication and authorization
+- Database design and optimization
+- RESTful API architecture
+- State management with Context API
+- Responsive UI design
+- Transaction-safe operations
+- Geospatial queries
+- Time-based business logic
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
+## 📝 License
 
-ISC
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🆘 Need Help?
+## 👨‍💻 Author
 
-- Check [SETUP.md](./SETUP.md) for detailed setup instructions
-- Verify MongoDB connection and environment variables
-- Check console logs for error details
-- Ensure all dependencies are installed with `npm run install-all`
+**Kumar Sai**  
+- GitHub: [@Kumarsai-17](https://github.com/Kumarsai-17)
+- Project: [Eventric](https://github.com/Kumarsai-17/Eventric)
+
+## 🙏 Acknowledgments
+
+- MongoDB for excellent documentation
+- React community for best practices
+- Socket.IO for real-time capabilities
+
+---
+
+⭐ **If you find this project helpful, please star the repository!**
+
+📧 **For questions or feedback, open an issue on GitHub**
+
+---
+
+**Built with ❤️ using the MERN Stack**
