@@ -7,7 +7,7 @@
     "server": "cd server && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "install-all": "npm install && cd server && npm install && cd ../client && npm install",
-    "build": "cd client && npm install && npm run build"
+    "build": "npm --prefix client install && npm --prefix client run build"
   },
   "keywords": ["mern", "event-booking", "ticket-exchange", "real-time", "socket.io"],
   "author": "",
